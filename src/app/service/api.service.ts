@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import {Noticia} from '../Interfaces/Noticia'
 
 @Injectable({
   providedIn: 'root',
@@ -15,11 +16,11 @@ export class ApiService {
     return this.http.get<any>(apiUrl);
   }
 
-  buscarNoticiaAPI(palabraClave: string): Observable<any[]> {
+  buscarNoticiaAPI(palabraClave: string): Observable<Noticia> {
       console.log(
         `Llamando a buscarNoticiaAPI con palabraClave: ${palabraClave}`
       );
-    return this.http.get<any[]>(
+    return this.http.get<Noticia>(
       `${this.url}?title_contains=${palabraClave}`
     );
   }

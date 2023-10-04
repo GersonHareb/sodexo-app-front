@@ -16,7 +16,7 @@
     <img [src]="favorito.image_url" alt="Article Image" />
     <div class="card-text">
       <a [href]="favorito.url" target="_blank">
-        <p>{{ favorito.published_at | date : "dd MM yyyy" }}</p>
+        <p>{{ favorito.published_at | date : "dd MMM yyyy" }}</p>
         <h2>{{ favorito.title }}</h2>
         <p>{{ favorito.summary }}</p>
       </a>

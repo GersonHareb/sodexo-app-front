@@ -13,7 +13,5 @@
 
 body{
   background: linear-gradient(135deg, #1d1e2b, #34415e, #1d1e2b);
-  min-height: 100vh;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body { min-height: 100%; }

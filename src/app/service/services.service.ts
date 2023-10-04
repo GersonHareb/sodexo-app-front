@@ -52,7 +52,6 @@ export class ServicesService {
   }
 
   buscarNoticia(palabraClave: string): Observable<any[]> {
-    debugger
     return this.http.get<any[]>(`${this.apiUrl}/buscar?title=${palabraClave}`);
   }
 }

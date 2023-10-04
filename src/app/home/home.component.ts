@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   estaEnFavoritos: boolean = false;
   busqueda: string = '';
   nextPageUrl: string | null = null;
+  previousPageUrl: string | null = null;
 
   //chat
   resultadosDeBusqueda: any[] = [];
@@ -29,9 +30,9 @@ export class HomeComponent implements OnInit {
     private favoritoService: ServicesService,
     private fb: FormBuilder
   ) {
-      this.searchForm = this.fb.group({
-        title: [''], // Puedes agregar validadores si es necesario
-      });
+    this.searchForm = this.fb.group({
+      title: [''], // Puedes agregar validadores si es necesario
+    });
   }
 
   ngOnInit(): void {
@@ -42,6 +43,8 @@ export class HomeComponent implements OnInit {
     this.apiService.getData().subscribe((data: any) => {
       this.data = data;
       this.nextPageUrl = data.next;
+      this.previousPageUrl = data.previous;
+      console.log('pagina', data.next);
       console.log(this.data);
       this.data.results.forEach((noticia: any) => {
         noticia.esFavorito = this.favoritoService.esFavorito(noticia.id);
@@ -52,16 +55,20 @@ export class HomeComponent implements OnInit {
   buscar(): void {
     const title = this.searchForm?.get('title')?.value;
     if (title) {
-      debugger;
-      this.apiService.buscarNoticiaAPI(title).subscribe((result) => {
-        this.resultadosDeBusqueda = result;
-        this.mostrarResultadosBusqueda = true;
-        console.log("resultados busqueda: ", result);
-      }, (error) =>{
-        console.error("Error de la respuesta API: ", error);
-      });
+      this.apiService.buscarNoticiaAPI(title).subscribe(
+        (result) => {
+          this.resultadosDeBusqueda = result.results;
+          this.mostrarResultadosBusqueda = true;
+          console.log('resultados busqueda: ', result);
+        },
+        (error) => {
+          console.error('Error de la respuesta API: ', error);
+        }
+      );
     }
   }
+
+  //
 
   marcarComoFavorito(noticia: any) {
     if (!this.favoritoService.esFavorito(noticia.id)) {
@@ -95,5 +102,33 @@ export class HomeComponent implements OnInit {
     return this.favoritoService.esFavorito(noticia.id);
   }
 
-  cargarSiguientePagina(): void {}
+  cargarSiguientePagina(): void {
+    if (this.nextPageUrl) {
+      this.apiService.getData(this.nextPageUrl).subscribe((data: any) => {
+        this.data = data;
+        this.nextPageUrl = data.next;
+        this.previousPageUrl = data.previous;
+        this.resultadosDeBusqueda = data.results; // Actualiza resultados de búsqueda si es necesario
+        console.log(this.data);
+        this.data.results.forEach((noticia: any) => {
+          noticia.esFavorito = this.favoritoService.esFavorito(noticia.id);
+        });
+      });
+    }
+  }
+
+  cargarPaginaAnterior(): void {
+    if (this.previousPageUrl) {
+      this.apiService.getData(this.previousPageUrl).subscribe((data: any) => {
+        this.data = data;
+        this.nextPageUrl = data.next;
+        this.previousPageUrl = data.previous;
+        this.resultadosDeBusqueda = data.results; // Actualiza resultados de búsqueda si es necesario
+        console.log(this.data);
+        this.data.results.forEach((noticia: any) => {
+          noticia.esFavorito = this.favoritoService.esFavorito(noticia.id);
+        });
+      });
+    }
+  }
 }

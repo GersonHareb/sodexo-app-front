@@ -23,7 +23,7 @@ export class FavoritosComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private servicesService: ServicesService) {
     this.searchForm = this.fb.group({
-      palabraClave: [''],
+      title: [''],
     });
   }
 
