@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: 'Inter', sans-serif;
+  src: url('./assets/fonts/Inter-Variable.ttf');
+}
+
+*{
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+  background: linear-gradient(135deg, #1d1e2b, #34415e, #1d1e2b);
+  min-height: 100vh;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

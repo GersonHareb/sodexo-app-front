@@ -1,0 +1,158 @@
+
+
+section {
+  width: 100%;
+}
+
+nav {
+  position: relative;
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 9;
+}
+
+.nav-container {
+  width: 1000px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto;
+}
+
+.nav-container a {
+  text-decoration: none;
+  color: white;
+  font-weight: 900;
+}
+
+.buscador input {
+  width: 250px;
+  height: 30px;
+  border-radius: 5px;
+  border: none;
+}
+
+input::placeholder {
+  padding-left: 10px;
+}
+
+nav button{
+  padding: 8px 20px;
+  border: none;
+  border-radius:  6px;
+  background-color: aliceblue;
+  color: black;
+}
+
+
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  max-width: 1000px;
+  margin: auto;
+  padding-top: 60px;
+}
+
+.card {
+  position: relative;
+  border: 1px solid #ccc;
+  margin: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.301);
+  background-color: #fff;
+  width: 100%;
+  max-width: 300px;
+  height: 500px;
+  overflow: hidden;
+  z-index: 9;
+  border: none;
+}
+
+.card img {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  z-index: 1;
+  right: 0;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(58, 56, 56, 0.678); /* Color negro semi-transparente */
+  z-index: 2; /* Coloca el overlay encima de la imagen */
+}
+
+.card:hover .card-text {
+  top: 10%; /* Reduzca el margen superior al hacer hover */
+}
+
+.card:hover .card-text p {
+  margin-bottom: 12px;
+  max-height: 200px; /* Altura máxima del resumen cuando se hace hover */
+}
+
+.card-text {
+  height: 100%;
+  position: absolute;
+  top: 30%;
+  text-align: center;
+
+  padding: 20px;
+  z-index: 8;
+  transition: top 0.3s ease-out;
+}
+
+.card-text p {
+  font-size: 1rem;
+  max-height: 0; /* Inicialmente oculto */
+  overflow: hidden;
+  transition: max-height 0.3s ease-out, margin-bottom 0.3s ease-out; /* Transiciones suaves */
+  margin: 0; /* Elimina el margen superior e inferior */
+  padding: 0;
+}
+
+.card h2 {
+  font-size: 1.4rem;
+  margin-bottom: 8px;
+  font-style: italic;
+  transition: margin-bottom 0.3s ease-out;
+}
+
+.card a {
+  z-index: 999999;
+  text-decoration: none;
+  color: white;
+}
+
+.corazon,
+.corazon-lleno {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 28px;
+  cursor: pointer;
+  color: rgb(255, 255, 255);
+  z-index: 3;
+}
+
+button.siguiente{
+  position: relative;
+  z-index: 9;
+}
+
+.paginacion{
+  text-align: center;
+  padding: 60px;
+}
