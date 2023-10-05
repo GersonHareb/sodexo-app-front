@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
     private fb: FormBuilder
   ) {
     this.searchForm = this.fb.group({
-      title: [''], // Puedes agregar validadores si es necesario
+      title: [''],
     });
   }
 
@@ -75,7 +75,7 @@ export class HomeComponent implements OnInit {
       this.favoritoService.agregarFavorito(noticia).subscribe(
         (response) => {
           console.log('Agregado a favoritos');
-          noticia.esFavorito = true; // Actualizar el estado local
+          noticia.esFavorito = true;
         },
         (error) => {
           console.error('Error al guardar', error);
@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
     this.favoritoService.eliminarFavorito(noticia.id).subscribe(
       () => {
         console.log('Eliminado de favoritos');
-        noticia.esFavorito = false; // Actualizar el estado local
+        noticia.esFavorito = false;
       },
       (error) => {
         console.error('Error al eliminar', error);
@@ -108,7 +108,7 @@ export class HomeComponent implements OnInit {
         this.data = data;
         this.nextPageUrl = data.next;
         this.previousPageUrl = data.previous;
-        this.resultadosDeBusqueda = data.results; // Actualiza resultados de búsqueda si es necesario
+        this.resultadosDeBusqueda = data.results; 
         console.log(this.data);
         this.data.results.forEach((noticia: any) => {
           noticia.esFavorito = this.favoritoService.esFavorito(noticia.id);
@@ -123,7 +123,7 @@ export class HomeComponent implements OnInit {
         this.data = data;
         this.nextPageUrl = data.next;
         this.previousPageUrl = data.previous;
-        this.resultadosDeBusqueda = data.results; // Actualiza resultados de búsqueda si es necesario
+        this.resultadosDeBusqueda = data.results; 
         console.log(this.data);
         this.data.results.forEach((noticia: any) => {
           noticia.esFavorito = this.favoritoService.esFavorito(noticia.id);

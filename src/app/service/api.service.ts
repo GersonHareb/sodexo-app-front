@@ -24,5 +24,4 @@ export class ApiService {
       `${this.url}?title_contains=${palabraClave}`
     );
   }
-  //https://api.spaceflightnewsapi.net/v4/articles/?title_contains=China
 }

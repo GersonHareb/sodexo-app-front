@@ -50,17 +50,14 @@ export class FavoritosComponent implements OnInit {
           noticia.title.toLowerCase().includes(title.toLowerCase())
         );
         console.log('Búsqueda en favoritos', this.noticias);
-        this.mostrarResultadosBusqueda = true; // Cambia a true cuando hay resultados de búsqueda
+        this.mostrarResultadosBusqueda = true;
       });
     } else {
-      // Si la palabra clave está vacía, muestra todos los favoritos nuevamente
       this.obtenerFavoritos();
-      this.mostrarResultadosBusqueda = false; // Cambia a false cuando no hay resultados de búsqueda
+      this.mostrarResultadosBusqueda = false;
     }
   }
 
-  //Bootstrap paginador
-  //como hacer filtros en Angular
 
   eliminarDeFavoritos(id: number): void {
     this.servicesService.eliminarFavorito(id).subscribe(
