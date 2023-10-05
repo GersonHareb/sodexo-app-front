@@ -16,17 +16,18 @@ export class FavoritosComponent implements OnInit {
   mostrarResultadosBusqueda = false;
   resultadosDeBusqueda: any[] = [];
 
-
   ngOnInit(): void {
-   this.obtenerFavoritos();
+    this.obtenerFavoritos();
   }
 
-  constructor(private fb: FormBuilder, private servicesService: ServicesService) {
+  constructor(
+    private fb: FormBuilder,
+    private servicesService: ServicesService
+  ) {
     this.searchForm = this.fb.group({
       title: [''],
     });
   }
-
 
   obtenerFavoritos(): void {
     this.servicesService.obtenerFavoritos().subscribe(
@@ -41,17 +42,23 @@ export class FavoritosComponent implements OnInit {
   }
 
   buscarPorPalabraClave(): void {
-    if (this.palabraClave.trim() !== '') {
-      this.servicesService
-        .buscarNoticia(this.palabraClave)
-        .subscribe((noticias) => {
-          this.noticias = noticias;
-        });
+    const title = this.searchForm.get('title')?.value;
+    console.log('buscando: ', title);
+    if (title && title.trim() !== '') {
+      this.servicesService.buscarNoticia(title).subscribe((noticias) => {
+        this.noticias = noticias.filter((noticia) =>
+          noticia.title.toLowerCase().includes(title.toLowerCase())
+        );
+        console.log('Búsqueda en favoritos', this.noticias);
+        this.mostrarResultadosBusqueda = true; // Cambia a true cuando hay resultados de búsqueda
+      });
     } else {
       // Si la palabra clave está vacía, muestra todos los favoritos nuevamente
       this.obtenerFavoritos();
+      this.mostrarResultadosBusqueda = false; // Cambia a false cuando no hay resultados de búsqueda
     }
   }
+
   //Bootstrap paginador
   //como hacer filtros en Angular
 

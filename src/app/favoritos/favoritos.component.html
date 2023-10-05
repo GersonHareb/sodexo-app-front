@@ -12,17 +12,32 @@
 </nav>
 
 <div class="card-container">
-  <div class="card" *ngFor="let favorito of listaFavoritos">
-    <img [src]="favorito.image_url" alt="Article Image" />
+  <div class="card-container" *ngIf="!mostrarResultadosBusqueda">
+    <div class="card" *ngFor="let favorito of listaFavoritos">
+      <img [src]="favorito.image_url" alt="Article Image" />
+      <div class="card-text">
+        <a [href]="favorito.url" target="_blank">
+          <p>{{ favorito.published_at | date : "dd MMM yyyy" }}</p>
+          <h2>{{ favorito.title }}</h2>
+          <p>{{ favorito.summary }}</p>
+        </a>
+        <button (click)="eliminarDeFavoritos(favorito.id)">
+          Eliminar de Favoritos
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-container" *ngIf="mostrarResultadosBusqueda">
+  <div class="card" *ngFor="let noticia of noticias">
+    <img [src]="noticia.image_url" alt="Article Image" />
     <div class="card-text">
-      <a [href]="favorito.url" target="_blank">
-        <p>{{ favorito.published_at | date : "dd MMM yyyy" }}</p>
-        <h2>{{ favorito.title }}</h2>
-        <p>{{ favorito.summary }}</p>
+      <a [href]="noticia.url" target="_blank">
+        <p>{{ noticia.published_at | date : "dd MMM yyyy" }}</p>
+        <h2>{{ noticia.title }}</h2>
+        <p>{{ noticia.summary }}</p>
       </a>
-      <button (click)="eliminarDeFavoritos(favorito.id)">
-        Eliminar de Favoritos
-      </button>
     </div>
   </div>
 </div>
